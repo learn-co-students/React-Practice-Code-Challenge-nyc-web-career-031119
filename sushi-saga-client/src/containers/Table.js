@@ -6,12 +6,12 @@ const Table = (props) => {
     return array.map((x, index) => {
       return <div className="empty-plate" style={{ top: -7 * index }}/>
     })
-  }
+  };
 
   return (
     <Fragment>
       <h1 className="remaining">
-        You have: ${ /* Give me how much money I have left */ } remaining!
+        You have: ${ props.remainingBudget } remaining!
       </h1>
       <div className="table">
         <div className="stack">
@@ -21,12 +21,12 @@ const Table = (props) => {
                and renders an empty plate
                for every element in the array
             */
-            renderPlates([])
+            renderPlates(props.finishedSushi)
           }
         </div>
       </div>
     </Fragment>
   )
-}
+};
 
 export default Table

@@ -28,22 +28,22 @@ class App extends Component {
   }
 
   eatSushi = (clickedSushi) => {
-    // create copy of clicked sushi and set it to eaten
-    let mySushi = {...clickedSushi};
-    mySushi.eaten = true;
-    // Remove originally clicked sushi from state.sushis
-    let sushiIndex = this.state.sushis.findIndex(el => {
-      return el.id === clickedSushi.id
-    })
-
-    let newSushis = [...this.state.sushis]
-    newSushis.splice(sushiIndex, 1);
-
-    this.setState({
-      sushis: [...newSushis, mySushi],
-      eatenSushis: [...this.state.eatenSushis, clickedSushi],
-      budget: this.state.budget - clickedSushi.price
-    })
+    if (!this.state.eatenSushis.includes(clickedSushi) && clickedSushi.price <= this.state.budget) {
+      // create copy of clicked sushi and set it to eaten
+      let mySushi = {...clickedSushi};
+      mySushi.eaten = true;
+      // Remove originally clicked sushi from state.sushis
+      let sushiIndex = this.state.sushis.findIndex(el => {
+        return el.id === clickedSushi.id
+      })
+      this.setState((state, props) => {
+        this.state.sushis[sushiIndex].eaten = true;
+        return {
+          eatenSushis: [...this.state.eatenSushis, clickedSushi],
+          budget: this.state.budget - clickedSushi.price
+        }
+      })
+    }
   }
 
   shiftSushis = () => {

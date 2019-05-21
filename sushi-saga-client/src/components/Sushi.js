@@ -14,7 +14,7 @@ class Sushi extends React.Component {
              onClick={this.handleClick}>
           {
             /* Tell me if this sushi has been eaten! */
-            false ?
+            this.props.sushi.eaten ?
               null
             :
               <img src={this.props.sushi.img_url} width="100%" />
